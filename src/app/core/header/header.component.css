@@ -1,0 +1,11 @@
+nav { background-color: steelblue; }
+            
+nav a { color: white; }
+
+.navbar-header {
+    color: white;
+}
+
+#savedata a:hover, #fetchdata a:hover {
+    color: black;
+}
