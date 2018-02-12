@@ -4,14 +4,13 @@
     <form  (ngSubmit)="onSignIn(f)" #f ="ngForm"  >
       <div class="form-group" style="margin-top: 20px">
         <label for="email"> Email </label> <!--for firebase you auth with email and password -->
-        <input type="email" name = "email" class="form-control" ngModel>
+        <input type="email" name = "email" class="form-control" id="EmailId" ngModel required>
       </div>
       <div class="form-group"  style="margin-top: 20px">
         <label for="password"> Password </label> <!--for firebase you auth with email and password -->
-        <input type="password" name = "password" class="form-control" ngModel>
+        <input type="password" name = "password" class="form-control" id="Password" ngModel required>
         <button style="margin-top: 20px" class="btn btn-primary" type="submit" [disabled]="!f.valid"> Sign In </button>
-      
-      </div>
+      </div> 
     </form>
     </div>
   </div>

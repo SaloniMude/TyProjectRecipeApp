@@ -13,13 +13,15 @@ export class DataStorageService {
 
     storeRecipes() {
         const token = this.authService.getToken();
-        return this.http.put('https://recipebook-86a50.firebaseio.com/recipes.json?auth='+token, this.recipeService.getRecipies());
+        const userId = this.authService.getUserId();
+        return this.http.put('https://recipebook-86a50.firebaseio.com/recipes/users/'+ userId +'.json?auth=' + token, this.recipeService.getRecipies());
          /* put triggers old data to be completely overwrriten with firebase */
     } 
 
     getRecipes() {
         const token = this.authService.getToken();
-        this.http.get('https://recipebook-86a50.firebaseio.com/recipes.json?auth=' + token).map(
+        const userId = this.authService.getUserId();
+        this.http.get('https://recipebook-86a50.firebaseio.com/recipes/users/'+ userId +'.json?auth=' + token).map(
             (response: Response) => {
                 const recipes: Recipe[] = response.json(); //turns json data into js object
                 for(let recipe of recipes) {
