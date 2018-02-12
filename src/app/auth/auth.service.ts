@@ -2,11 +2,17 @@ import { RecipeService } from './../recipes/recipe.service';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class AuthService {
     token: string;
-    userID : string;
+    userID: string;
+
+    private logInErrorSubject = new Subject<string>();
+    public getLoginErrors(): Subject<string>{
+        return this.logInErrorSubject;
+ }
 
     constructor(private router: Router, private recipes: RecipeService ){}
     
@@ -17,7 +23,7 @@ export class AuthService {
     }
 
     signinUser(email: string, password: string) {
-        firebase.auth().signInWithEmailAndPassword(email, password).then(
+        return firebase.auth().signInWithEmailAndPassword(email, password).then(
             response => {
                 this.router.navigate(['/recipes']);
                 firebase.auth().currentUser.getIdToken()
@@ -27,11 +33,9 @@ export class AuthService {
             }
         )
         .catch (
-            error => console.log(error)
-            
+            error => this.logInErrorSubject.next('Invalid username or password')
         );
     }
-    
 
     logout(){
         firebase.auth().signOut();
