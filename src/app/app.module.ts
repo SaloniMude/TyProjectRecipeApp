@@ -1,3 +1,4 @@
+
 import { AuthGuard } from './auth/auth-guard.service';
 import { CoreModule } from './core/core.module';
 import { AuthService } from './auth/auth.service';
@@ -29,7 +30,8 @@ import { AuthModule } from './auth/auth.module';
     ShoppingListModule,
     AuthModule,
     CoreModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
     
   ],
   providers: [AuthGuard],
